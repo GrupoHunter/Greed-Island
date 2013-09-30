@@ -14,7 +14,7 @@ class FirstPartTest extends FlatSpec with ShouldMatchers with MockitoSugar {
     val mockCareer = mock[Career]
     val mockCourse = mock[Course]
     val student = new Student("Fulanito", "Cosme", 24, mockCareer)
-    student courses = (mockCourse, true, 4) ::
+    student noteTablesAllCourses = (mockCourse, true, 4) ::
       (mockCourse, true, 6) ::
       (mockCourse, true, 3) ::
       (mockCourse, true, 8) ::
@@ -48,7 +48,7 @@ class FirstPartTest extends FlatSpec with ShouldMatchers with MockitoSugar {
   it should "have the notes table with (10->2, 9->1, 8->2, 6->1, 5->3, 4->1, 3->1, 2->1, 1->1)" in {
     val f = fixture
     val student = new Student("Fulanito", "Cosme", 24, f.mockCareer)
-    student courses = (f.mockCourse, true, 10) :: (f.mockCourse, true, 10) :: (f.mockCourse, true, 9) :: (f.mockCourse, true, 8) ::
+    student noteTablesAllCourses = (f.mockCourse, true, 10) :: (f.mockCourse, true, 10) :: (f.mockCourse, true, 9) :: (f.mockCourse, true, 8) ::
       (f.mockCourse, true, 8) :: (f.mockCourse, true, 6) :: (f.mockCourse, true, 5) :: (f.mockCourse, true, 5) ::
       (f.mockCourse, true, 5) :: (f.mockCourse, true, 4) :: (f.mockCourse, true, 3) :: (f.mockCourse, true, 2) ::
       (f.mockCourse, true, 1) :: List()
@@ -62,7 +62,7 @@ class FirstPartTest extends FlatSpec with ShouldMatchers with MockitoSugar {
   it should "give 3 times the best note is 9 and 4 times is 3" in {
     val f = fixture
     val student = new Student("Fulanito", "Cosme", 24, f.mockCareer)
-    student courses = (f.mockCourse, true, 9) :: (f.mockCourse, true, 9) :: (f.mockCourse, true, 9) :: (f.mockCourse, true, 8) ::
+    student noteTablesAllCourses = (f.mockCourse, true, 9) :: (f.mockCourse, true, 9) :: (f.mockCourse, true, 9) :: (f.mockCourse, true, 8) ::
       (f.mockCourse, true, 8) :: (f.mockCourse, true, 6) :: (f.mockCourse, true, 5) :: (f.mockCourse, true, 5) ::
       (f.mockCourse, true, 5) :: (f.mockCourse, true, 4) :: (f.mockCourse, true, 3) :: (f.mockCourse, true, 3) ::
       (f.mockCourse, true, 3) ::(f.mockCourse, true, 3) ::(f.mockCourse, true, 3) ::(f.mockCourse, true, 2) ::

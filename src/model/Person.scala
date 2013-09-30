@@ -1,8 +1,6 @@
 package model
 
-abstract class Person (aName: String, aLastname: String, anAge: Int) {
-
-}
+abstract class Person (aName: String, aLastname: String, anAge: Int)
 
 trait Schedule {
   type Schedule = List[Event]
@@ -19,6 +17,6 @@ trait Schedule {
     case (head: Talk) :: tail => head :: getEvents(tail)
     case (head: Project) :: tail => head.log.++(getEvents(tail))
     case (head: Seminary) :: tail => head.sessions.++(getEvents(tail))
-    case _ => List() //TODO -> is this needed?
+    case _ => Nil
   }
 }

@@ -53,19 +53,16 @@ class ThirdPartTest extends FlatSpec with ShouldMatchers with MockitoSugar  {
 	  val f = fixture 
 	  val mockLog = mock[List[Experiment]]
 	  val mockMembersWithSchedule = mock[List[Person with Schedule]]
-	  val result = (new Result(f.mockDate, "Article result"))::List()
 	  f.group presentedActivities = (new Seminary("Article Program", f.responsible,f.mockMembers, 24, f.mockSession))::
 	  								(new Project("Butterfly", f.responsible, f.mockMembers, 12, "I haven't idea", List(), f.mockExperiments))::
-	  								(new Talk("Article Lambda",f.responsible,mockMembersWithSchedule , 12, 64, f.mockDate, f.mockTime, f.mockTime))::
-	  								(new Project("Night", f.responsible, f.mockMembers, 13, "I have dream",result, mockLog))::List()
+	  								(new Talk("Article Lambda",f.responsible,mockMembersWithSchedule , 12, 64, f.mockDate, f.mockTime, f.mockTime))::List()
 	  
 	  f.group.presentedActivities foreach ( p => p.approve)
 	  
 	  val publishedArticles =  f.group.publishedArticles
 	  
-	  publishedArticles should have length (3)
+	  publishedArticles should have length (2)
 	  publishedArticles(0)._1 should have ('aName("Article Program"))
 	  publishedArticles(1)._1 should have ('aName("Article Lambda"))
-	  publishedArticles(2)._1 should have ('aName("Night"))
 	}
 }

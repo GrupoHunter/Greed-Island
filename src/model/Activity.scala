@@ -1,9 +1,5 @@
 package model
 
-import java.sql.Time
-import java.util.Calendar
-import java.util.Date
-
 import java.util.{Date, Calendar}
 import java.sql.Time
 
@@ -28,7 +24,6 @@ abstract class Activity () {
 	def financialAmount: Int
 	
 	def containsWordsArticle : Boolean = aName contains("Article")
-	
 }
 
 case class Seminary (
@@ -41,6 +36,15 @@ case class Seminary (
 	extends Activity () {
   
   def neededSpace : Int = members length
+  
+  /**
+   * Adds its name as description on each session.
+   */
+  def putDescription (sessions: List[Session]) = {
+	for(session <- sessions){
+	  session.putDescription(aName)
+	}
+  }
 }
 
 case class Project (
@@ -64,7 +68,7 @@ case class Talk (
 					financialAmount: Int,
 					aDate: Date,
 					fromHour: Time,
-					toHour: Time 
+					toHour: Time
 				) 
 	extends Activity () with Event {
 	
@@ -79,13 +83,20 @@ case class Talk (
 
 case class Result (aDate: Date, description: String)
 
-case class Session (aDate: Date, fromHour: Time, toHour: Time) extends Event
+case class Session (aDate: Date, fromHour: Time, toHour: Time) extends Event {
+  /**
+   * This method, puts the seminary's name. (The one where this session was added)
+   */
+  implicit def putDescription (aName: String) = {
+    description = aName
+  }
+}
 
-case class Experiment (aDate: Date, fromHour: Time, toHour: Time, description: String) extends Event
+case class Experiment (aDate: Date, fromHour: Time, toHour: Time/*, description: String*/) extends Event
 
 trait Event {
   def aDate: Date
   def fromHour: Time
   def toHour: Time
-//  def description: String //TODO
+  var description: String = null
 }

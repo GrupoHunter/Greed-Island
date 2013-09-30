@@ -3,6 +3,7 @@ package model
 import java.util.Date
 
 class Group(members: List[Person]) {
+  
   var presentedActivities: List[Activity] = List()
 
   def nonApprovedActivities: List[Activity] = {
@@ -17,5 +18,4 @@ class Group(members: List[Person]) {
     val presentedActivities = this.presentedActivities filter (a => (a.containsWordsArticle))
     presentedActivities.foldRight(List[(Activity, Date)]())((a,b)=> (a, a.approvalDate) :: b)
   }
-
 }
