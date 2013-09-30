@@ -174,7 +174,7 @@ class SecondPartTest extends FreeSpec with ShouldMatchers with GivenWhenThen wit
         fulaHaskel.bestNoteNTimes(2) should be(9)
       }
 
-      "About annaul average of a student" ignore {
+      "About annaul average of a student" in {
         given(" the notes of a student ")
         val mock = mocks
         val student = new Student("Pepito", "Sabe", 26, mock.career)
@@ -217,8 +217,33 @@ class SecondPartTest extends FreeSpec with ShouldMatchers with GivenWhenThen wit
 
       }
 
-      "About annual average of a Professor" ignore { // TODO annual average
-    	  
+      "About annual average of a Professor" in {
+        given("the courses taken by a teacher in 2012")
+        val menganoPython = AcademicData.getProfessor("Mengano", "Python")
+
+        when(" we want to know the average of its notes in 2012 ")
+        val dataToProfessorIn2012 = menganoPython.annualAverage(2012)
+
+        and("the results of approved")
+        dataToProfessorIn2012.averageWithoutFails should be(8.3 plusOrMinus(0.1))
+
+        and("dissaproved")
+        dataToProfessorIn2012.averageWithFails should be(1.5)
+
+        and("amount approved")
+        dataToProfessorIn2012.amountSuccessful should be(6)
+
+        and("amount abandoned")
+        dataToProfessorIn2012.amountFailed should be(2)
+
+        and("average approved subjects")
+        dataToProfessorIn2012.averageApprovedSubjects should be(1)
+
+        and("have the notes table")
+        dataToProfessorIn2012.notesTable should equal( List((10,0), (9,4), (8,0), (7,2), (6,0), (5,0), (4,0), (3,2), (2,0), (1,0), (0,2)))
+
+        and("the best note in n times")
+        dataToProfessorIn2012.bestNoteNTimes(4) should be(9)
       }
     }
   }
