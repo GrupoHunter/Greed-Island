@@ -1,6 +1,7 @@
 package test
 
 import model._
+import java.util.Date
 
 class DataToTest {
 
@@ -11,7 +12,9 @@ class DataToTest {
   }    
   private def loadingSystemCareer: Career = {
     val careerTpi = new Career("Programming", List())
-
+    val date2012 = new Date
+    date2012.setYear(2012)
+    
     //subjects load
     val intro = (new Subject("Intro", careerTpi, List()))
     val dataBase = (new Subject("Data Base", careerTpi, List()))
@@ -35,8 +38,8 @@ class DataToTest {
     val studentsMath = (studentsTPI(1)) :: (studentsTPI(2)) :: (studentsTPI(3)) :: (studentsTPI(5)) :: List()
 
     //courses load with professors and students
-    intro.courses = ((new Course(intro, menganoPython :: List(), studentsIntro1)) :: (new Course(intro, sultanoScala :: List(), studentsIntro2)) :: List())
-    dataBase.courses = (new Course(dataBase, menganoPython :: List(), studentsDataBase)) :: (new Course(dataBase, menganoPython :: sultanoScala :: List(), studentsTPI(3) :: List())) :: List()
+    intro.courses = ((new Course(intro, menganoPython :: List(), studentsIntro1)) :: (new Course(intro, sultanoScala :: List(), studentsIntro2, date2012)) :: List())
+    dataBase.courses = (new Course(dataBase, menganoPython :: List(), studentsDataBase, date2012)) :: (new Course(dataBase, menganoPython :: sultanoScala :: List(), studentsTPI(3) :: List())) :: List()
     math1.courses = (new Course(math1, ricardoMate::fulaHaskel :: List(), studentsMath)) :: List()
     
     //notes load Students
